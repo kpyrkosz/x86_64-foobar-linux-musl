@@ -17,3 +17,6 @@ ninja cxx cxxabi unwind crt builtins
 ninja install-{cxx,cxxabi,unwind,crt,builtins}
 ninja llvm-{objdump,objcopy,as,ar,ranlib,addr2line,nm,readelf,strip,symbolizer,strings,size} {cxx,cxxabi,unwind,clang,clang-resource-headers,crt,builtins}
 ninja install-llvm-{objdump,objcopy,as,ar,ranlib,addr2line,nm,readelf,strip,symbolizer,strings,size} install-{cxx,cxxabi,unwind,clang,clang-resource-headers,crt,builtins}
+# TODO: As Im waiting for it to finish, I recall there was a flag
+# to limit the built backends for the first stage compiler and
+# something along the lines of LLVM_TARGETS_TO_BUILD
