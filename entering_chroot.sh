@@ -10,7 +10,7 @@
 
 . vars.sh
 
-chroot "$LFS" /usr/bin/env -i   \
+chroot "$LFS_SYSROOT" /usr/bin/env -i   \
     HOME=/root                  \
     TERM="$TERM"                \
     PS1='(lfs chroot) \u:\w\$ ' \
