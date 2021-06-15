@@ -11,5 +11,5 @@ set -e
 
 cd "${LFS_SOURCES}"
 echo -e '#include<stdio.h>\nint main(){puts("foobar");return 0;}' > foo.c
-clang foo.c --sysroot="$LFS_SYSROOT"
+$CC foo.c --sysroot="$LFS_SYSROOT"
 "${LFS_SYSROOT}/lib/ld-musl-x86_64.so.1" ./a.out
