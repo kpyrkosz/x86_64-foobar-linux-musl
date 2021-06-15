@@ -32,3 +32,6 @@ ln -sv "${LFS_TGT}-clang++" "${LFS_SYSROOT}/usr/bin/c++"
 
 # Stripping
 for i in "${LFS_SYSROOT}"/usr/bin/*; do [[ -f $i && ! -L $i ]] && llvm-strip "$i"; done
+
+# TODO ommited link /bin/sh and /tmp directory 
+# create env script where user can supply own flags like flto, O3, march=native, -s --gc-sections and so on, for the builds of the final system inside chroot
