@@ -10,7 +10,7 @@ pushd build
                --disable-libseccomp \
                --disable-xzlib      \
                --disable-zlib
-  make
+  make -j"$PARALLEL_JOBS"
 popd
 CFLAGS="--sysroot=$LFS_SYSROOT" ./configure --prefix=/usr --host="$LFS_TGT"
 make FILE_COMPILE=$(pwd)/build/src/file -j"$PARALLEL_JOBS"

@@ -2,6 +2,7 @@
 
 . vars.sh
 
+# TODO hardcoded paths
 # Temporarly copy shared libraries: libunwind.so, libc++.so libc++abi.so
 # into sysroot/usr/lib. Right now they carry dependency to hosts's glibc
 # but will be built against the freshly bootstrapped musl

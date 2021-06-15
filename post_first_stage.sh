@@ -19,4 +19,4 @@ fi
 
 # Links in /bin. Maybe make /bin be symlink to /usr/bin like Debian does?
 # TODO
-ln -sv /usr/bin/bash "${LFS_SYSROOT}/bin/bash"
+# ln -sv /usr/bin/bash "${LFS_SYSROOT}/bin/bash"
