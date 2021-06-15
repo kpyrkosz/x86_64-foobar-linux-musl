@@ -20,3 +20,15 @@ fi
 # Links in /bin. Maybe make /bin be symlink to /usr/bin like Debian does?
 # TODO
 # ln -sv /usr/bin/bash "${LFS_SYSROOT}/bin/bash"
+
+# Links for llvm-objdump to objdump etc
+for i in "${LFS_SYSROOT}"/usr/bin/llvm-*; do [[ -f $i && ! -L $i ]] && ln -sv "$(basename $i)" "${LFS_SYSROOT}/usr/bin/${i##*llvm-}"; done
+
+# Links for clang and clang++ respecting musl
+ln -sv clang "${LFS_SYSROOT}/usr/bin/${LFS_TGT}-clang"
+ln -sv clang++ "${LFS_SYSROOT}/usr/bin/${LFS_TGT}-clang"++
+ln -sv "${LFS_TGT}-clang" "${LFS_SYSROOT}/usr/bin/cc"
+ln -sv "${LFS_TGT}-clang++" "${LFS_SYSROOT}/usr/bin/c++"
+
+# Stripping
+for i in "${LFS_SYSROOT}"/usr/bin/*; do [[ -f $i && ! -L $i ]] && llvm-strip "$i"; done
