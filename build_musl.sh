@@ -8,3 +8,4 @@ CROSS_COMPILE="llvm-" ./configure --prefix="$LFS_PREFIX" --syslibdir="$LFS_SYSRO
 make -j"$PARALLEL_JOBS"
 make install
 ln -sfv libc.so "${LFS_SYSROOT}/lib/ld-musl-x86_64.so.1"
+ln -sfv /lib/libc.so "${LFS_SYSROOT}/bin/ldd"
