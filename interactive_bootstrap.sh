@@ -68,6 +68,14 @@ export LD=ld.lld
 # bash initial_bootstrap_scripts/build_linux_headers.sh
 
 # m4
-bash initial_bootstrap_scripts/build_m4.sh
+# bash initial_bootstrap_scripts/build_m4.sh
+
+# skip ncurses
+# bash
+# bash initial_bootstrap_scripts/build_bash.sh
+
+# coreutils
+bash initial_bootstrap_scripts/build_coreutils.sh
+
 
 # clang working in chroot
