@@ -60,3 +60,6 @@ export CC=clang
 export PARALLEL_JOBS=5
 # musl libc
 bash initial_bootstrap_scripts/build_musl.sh
+
+# kernel headers
+bash initial_bootstrap_scripts/build_linux_headers.sh
