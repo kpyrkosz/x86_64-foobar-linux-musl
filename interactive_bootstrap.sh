@@ -4,7 +4,11 @@ THIS_DIR=$PWD
 LFS_ARCH=x86_64
 LFS_VENDOR=foobar
 export LFS_TGT="${LFS_ARCH}-${LFS_VENDOR}-linux-musl"
-
+#TOTO autodetect host cc/ld
+export CC_FOR_BUILD=/usr/local/bin/cc
+export CXX_FOR_BUILD=/usr/local/bin/c++
+export HOST_LD=/usr/local/bin/ld.lld
+export CMAKE=/usr/local/bin/cmake
 # Determining sysroot
 while [[ -z $LFS_SYSROOT ]]; do
 echo "Enter the root directory where YOYO Linux is about to be installed"
@@ -62,10 +66,10 @@ bash initial_bootstrap_scripts/build_clang.sh
 export CC="${LFS_SYSROOT}/tools/bin/clang"
 export CXX="${LFS_SYSROOT}/tools/bin/clang++"
 export LD="${LFS_SYSROOT}/tools/bin/ld.lld"
-#export CPPFLAGS="--sysroot=$LFS_SYSROOT"
+export CFLAGS="-O2"
+export CXXLAGS="-O2"
+export LDFLAGS="-s"
 #check for cc symlink
-export CC_FOR_BUILD=/usr/local/bin/cc
-export HOST_LD=/usr/local/bin/ld.lld
 # musl libc
 bash initial_bootstrap_scripts/build_musl.sh
 
@@ -94,5 +98,26 @@ bash initial_bootstrap_scripts/build_findutils.sh
 
 # gawk
 bash initial_bootstrap_scripts/build_gawk.sh
+
+# grep
+bash initial_bootstrap_scripts/build_grep.sh
+
+# gzip
+bash initial_bootstrap_scripts/build_gzip.sh
+
+# make
+bash initial_bootstrap_scripts/build_make.sh
+
+# patch
+bash initial_bootstrap_scripts/build_patch.sh
+
+# sed
+bash initial_bootstrap_scripts/build_sed.sh
+
+# tar
+bash initial_bootstrap_scripts/build_tar.sh
+
+# xz
+bash initial_bootstrap_scripts/build_xz.sh
 
 # clang working in chroots 
