@@ -59,40 +59,40 @@ export PARALLEL_JOBS=5
 bash initial_bootstrap_scripts/build_clang.sh
 
 # export CC, CXX etc for the frenshly built compiler
-export CC="${THIS_DIR}/x86_64-linux-musl-clang"
-export CXX="${THIS_DIR}/x86_64-linux-musl-clang++"
-export CPPFLAGS="--sysroot=$LFS_SYSROOT"
-export CC_FOR_BUILD=clang
-export LD=ld.lld
+export CC="${LFS_SYSROOT}/tools/bin/clang"
+export CXX="${LFS_SYSROOT}/tools/bin/clang++"
+export LD="${LFS_SYSROOT}/tools/bin/ld.lld"
+#export CPPFLAGS="--sysroot=$LFS_SYSROOT"
+#check for cc symlink
+export CC_FOR_BUILD=/usr/local/bin/cc
+export HOST_LD=/usr/local/bin/ld.lld
 # musl libc
-# bash initial_bootstrap_scripts/build_musl.sh
+bash initial_bootstrap_scripts/build_musl.sh
 
 # kernel headers
-# bash initial_bootstrap_scripts/build_linux_headers.sh
+bash initial_bootstrap_scripts/build_linux_headers.sh
 
 # m4
-# bash initial_bootstrap_scripts/build_m4.sh
+bash initial_bootstrap_scripts/build_m4.sh
 
 # skip ncurses
 
 # bash
-# bash initial_bootstrap_scripts/build_bash.sh
+bash initial_bootstrap_scripts/build_bash.sh
 
 # coreutils
-# bash initial_bootstrap_scripts/build_coreutils.sh
+bash initial_bootstrap_scripts/build_coreutils.sh
 
 # diffutils
-# bash initial_bootstrap_scripts/build_diffutils.sh
+bash initial_bootstrap_scripts/build_diffutils.sh
 
 # file
-# for now it does not build on VPS.. strange, it built on PC
-# clang-13: error: no such file or directory: './.libs/libmagic.so'
-# bash initial_bootstrap_scripts/build_file.sh
+bash initial_bootstrap_scripts/build_file.sh
 
 # findutils
-# bash initial_bootstrap_scripts/build_findutils.sh
+bash initial_bootstrap_scripts/build_findutils.sh
 
 # gawk
-# bash initial_bootstrap_scripts/build_gawk.sh
+bash initial_bootstrap_scripts/build_gawk.sh
 
-# clang working in chroot
+# clang working in chroots 
