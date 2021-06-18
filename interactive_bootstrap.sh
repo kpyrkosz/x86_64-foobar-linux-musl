@@ -56,10 +56,13 @@ cd "${OLDPWD}"
 
 export PARALLEL_JOBS=5
 # First build clang for the target using your host's default compiler.
-# bash initial_bootstrap_scripts/build_clang.sh
+bash initial_bootstrap_scripts/build_clang.sh
 
 # export CC, CXX etc for the frenshly built compiler
-export CC=clang
+export CC="${THIS_DIR}/x86_64-linux-musl-clang"
+export CXX="${THIS_DIR}/x86_64-linux-musl-clang++"
+export CPPFLAGS="--sysroot=$LFS_SYSROOT"
+export CC_FOR_BUILD=clang
 export LD=ld.lld
 # musl libc
 # bash initial_bootstrap_scripts/build_musl.sh
@@ -71,11 +74,25 @@ export LD=ld.lld
 # bash initial_bootstrap_scripts/build_m4.sh
 
 # skip ncurses
+
 # bash
 # bash initial_bootstrap_scripts/build_bash.sh
 
 # coreutils
-bash initial_bootstrap_scripts/build_coreutils.sh
+# bash initial_bootstrap_scripts/build_coreutils.sh
 
+# diffutils
+# bash initial_bootstrap_scripts/build_diffutils.sh
+
+# file
+# for now it does not build on VPS.. strange, it built on PC
+# clang-13: error: no such file or directory: './.libs/libmagic.so'
+# bash initial_bootstrap_scripts/build_file.sh
+
+# findutils
+# bash initial_bootstrap_scripts/build_findutils.sh
+
+# gawk
+# bash initial_bootstrap_scripts/build_gawk.sh
 
 # clang working in chroot

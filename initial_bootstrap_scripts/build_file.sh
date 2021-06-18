@@ -1,9 +1,8 @@
 #!/bin/bash
 
-. vars.sh
-. helper_fetch_and_build.sh
+THIS_PACKAGE=file
+. "$(dirname "$0")/validate_and_cd_into.sh"
 
-fetch_and_unpack "http://ftp.astron.com/pub/file/file-5.39.tar.gz"
 mkdir build
 pushd build
   CC=$CC_FOR_BUILD ../configure --disable-bzlib      \
@@ -12,6 +11,6 @@ pushd build
                --disable-zlib
   make -j"$PARALLEL_JOBS"
 popd
-CFLAGS="--sysroot=$LFS_SYSROOT" ./configure --prefix=/usr --host="$LFS_TGT"
+CFLAGS="--sysroot=$LFS_SYSROOT" ./configure --prefix="/usr" --host="$LFS_TGT"
 make FILE_COMPILE=$(pwd)/build/src/file -j"$PARALLEL_JOBS"
 make DESTDIR="$LFS_SYSROOT" install
