@@ -58,6 +58,7 @@ while read -r package_name tarball_link; do
 done < "${PACKAGE_LIST_FILE}"
 cd "${OLDPWD}"
 
+#TODO - change this to MAKEOPTS or MAKEFLAGE how as it called
 export PARALLEL_JOBS=5
 # First build clang for the target using your host's default compiler.
 bash initial_bootstrap_scripts/build_clang.sh

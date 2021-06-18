@@ -9,6 +9,7 @@ rm -rf build
 mkdir build
 cd build
 # TODO it's better to build with /usr prefix and then install everything to /tools and only unwind/cxx/cxxabi/crt/builtins to /usr/
+# TODO lass LDFLAGS to strip the entire thing
 # Fasten your seatbelts!!
 #okay, this one does not link libunwind in cxxabi but it builds proper crosscompiler (runniung on host and targeting musl)
 #cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$LFS_SYSROOT/tools" -DLLVM_ENABLE_PROJECTS="clang;compiler-rt;libcxx;libcxxabi;libunwind;lld" -DCLANG_DEFAULT_LINKER=lld -DCLANG_DEFAULT_CXX_STDLIB=libc++ -DCLANG_DEFAULT_RTLIB=compiler-rt -DCLANG_DEFAULT_UNWINDLIB=libunwind -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="$LFS_TGT" -DLLVM_DEFAULT_TARGET_TRIPLE="$LFS_TGT" -DLIBCXX_HAS_MUSL_LIBC=ON -DLLVM_TARGETS_TO_BUILD=X86
@@ -17,6 +18,7 @@ cd build
 #CXX
 # holy fuck, my head can't visualise the chain of dependencies
 # total edits of the file = 58
+# TODO maybe build the initial stage as shared libs to save space?
 
 CC=$CC_FOR_BUILD CXX=$CXX_FOR_BUILD "$CMAKE" ../llvm -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${LFS_SYSROOT}/tools" -DLLVM_ENABLE_PROJECTS="clang;compiler-rt;libcxx;libcxxabi;libunwind;lld" -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_BENCHMARKS=OFF -DLIBCXXABI_USE_LLVM_UNWINDER=YES -DCOMPILER_RT_BUILD_LIBFUZZER=OFF -DLIBCXX_USE_COMPILER_RT=YES -DLIBCXXABI_USE_COMPILER_RT=YES -DCLANG_DEFAULT_LINKER=lld -DCLANG_DEFAULT_CXX_STDLIB=libc++ -DCLANG_DEFAULT_RTLIB=compiler-rt -DCLANG_DEFAULT_UNWINDLIB=libunwind -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="$LFS_TGT" -DLLVM_DEFAULT_TARGET_TRIPLE="$LFS_TGT" -DLLVM_HOST_TRIPLE="$LFS_TGT" -DLLVM_TARGETS_TO_BUILD=X86 -DDEFAULT_SYSROOT="$LFS_SYSROOT"
 make cxx cxxabi unwind crt builtins
