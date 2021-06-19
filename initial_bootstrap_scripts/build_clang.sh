@@ -28,6 +28,10 @@ make install-llvm-{objdump,objcopy,as,ar,ranlib,addr2line,nm,readelf,strip,symbo
 pushd "${LFS_SYSROOT}/tools/bin/"
 for i in llvm-*; do ln -sv "$i" "${i#llvm-}"; done
 for i in llvm-*; do ln -sv "$i" "${LFS_TGT}-${i#llvm-}"; done
+ln -sv clang "${LFS_TGT}-clang"
+ln -sv clang++ "${LFS_TGT}-clang++"
+ln -sv clang "${LFS_TGT}-cpp"
+ln -sv ld.lld "${LFS_TGT}-ld"
 popd
 # TEMP
 exit 0
