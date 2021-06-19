@@ -121,4 +121,5 @@ bash initial_bootstrap_scripts/build_tar.sh
 # xz
 bash initial_bootstrap_scripts/build_xz.sh
 
-# clang working in chroots 
+# clang working in chroot
+bash initial_bootstrap_scripts/build_clang2.sh
