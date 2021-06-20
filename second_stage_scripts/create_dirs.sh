@@ -62,3 +62,6 @@ touch /var/log/{btmp,lastlog,faillog,wtmp}
 chgrp -v utmp /var/log/lastlog
 chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
+
+#TODO link cc, cpp, c++, /bin/sh
+# export CFLAGS='-O2' CXXFLAGS='-O2' LDFLAGS='-s'
