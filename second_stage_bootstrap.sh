@@ -8,7 +8,7 @@
 #+chown to everything to root to avoid UID problems with lfs user id on the build machine
 #mount and chroot inside
 #then go with python, perl and these things
-#delete /tools
+#+delete /tools
 #and that's the ready stage 2 that can be untared and chrooted into on the destination machine
 if (( $EUID != 0 )); then
 	echo "Please run the second stage as root"
@@ -21,7 +21,9 @@ if [[ -z ${LFS_SYSROOT} ]]; then
 fi
 
 # deduce the triple
-LFS_TGT=$("${LFS_SYSROOT}/tools/bin/clang" --version | grep 'Target: ' | cut -d' ' -f2)
+# TODO well, the /usr/bin/clang may not be runnable from host's machine, let's go with env var for now
+#LFS_TGT=x86_64-foobar-linux-musl
+#LFS_TGT=$("${LFS_SYSROOT}/usr/bin/clang" --version | grep 'Target: ' | cut -d' ' -f2)
 if [[ -z ${LFS_TGT} ]]; then
 	echo Error deducing triplet, the triplet is empty
 	exit 1
@@ -33,7 +35,7 @@ if [[ ${LFS_TGT} =~ ^[[:alnum:]]-[[:alnum:]]-[[:alnum:]]-[[:alnum:]]$ ]]; then
 fi
 
 # sanity checks
-pushd "${LFS_SYSROOT}/tools/bin/" > /dev/null
+pushd "${LFS_SYSROOT}/usr/bin/" > /dev/null
 declare -a required_stuff=(clang clang++ objdump ar)
 for i in "${required_stuff[@]}"; do
 	if [[ ! -f "${LFS_TGT}-${i}" ]]; then
@@ -47,3 +49,10 @@ chown -R root:root "${LFS_SYSROOT}/"
 
 mknod -m 600 "${LFS_SYSROOT}/dev/console" c 5 1
 mknod -m 666 "${LFS_SYSROOT}/dev/null" c 1 3
+
+rm -rv "${LFS_SYSROOT}/tools"
+
+#./lfs_enter.sh "${LFS_SYSROOT}" "/bin/bash"
+cp "second_stage_scripts/create_dirs.sh" "${LFS_SYSROOT}/tmp"
+chmod 500 "${LFS_SYSROOT}/tmp/create_dirs.sh"
+./lfs_enter.sh "${LFS_SYSROOT}" "tmp/create_dirs.sh"
