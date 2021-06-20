@@ -23,7 +23,7 @@ rm -rf "${directory_name}/"
 tar xf "${tarball_name}"
 
 cd "${directory_name}/"
-CROSS_COMPILE="llvm-" ./configure --prefix="/usr" --host="${LFS_TGT}"
+./configure --prefix="/usr" --host="${LFS_TGT}"
 make -j"$PARALLEL_JOBS"
 make DESTDIR="${LFS_SYSROOT}" install
 ln -sfv /lib/libc.so "${LFS_SYSROOT}/bin/ldd"

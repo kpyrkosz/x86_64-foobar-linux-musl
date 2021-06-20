@@ -1,10 +1,12 @@
 #!/bin/bash
 
+#TODO break on error and split into stages that can be interrupted and continued from
+
 THIS_DIR=$PWD
 LFS_ARCH=x86_64
 LFS_VENDOR=foobar
 export LFS_TGT="${LFS_ARCH}-${LFS_VENDOR}-linux-musl"
-#TOTO autodetect host cc/ld
+#TODO autodetect host cc/ld
 export CC_FOR_BUILD=/usr/local/bin/cc
 export CXX_FOR_BUILD=/usr/local/bin/c++
 export HOST_LD=/usr/local/bin/ld.lld
@@ -64,6 +66,7 @@ export PARALLEL_JOBS=5
 bash initial_bootstrap_scripts/build_clang.sh
 
 # export CC, CXX etc for the frenshly built compiler
+export PATH="${LFS_SYSROOT}/tools/bin:$PATH"
 export CC="${LFS_SYSROOT}/tools/bin/clang"
 export CXX="${LFS_SYSROOT}/tools/bin/clang++"
 export LD="${LFS_SYSROOT}/tools/bin/ld.lld"
