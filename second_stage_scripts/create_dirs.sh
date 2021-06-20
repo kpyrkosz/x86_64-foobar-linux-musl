@@ -63,5 +63,26 @@ chgrp -v utmp /var/log/lastlog
 chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
 
-#TODO link cc, cpp, c++, /bin/sh
-# export CFLAGS='-O2' CXXFLAGS='-O2' LDFLAGS='-s'
+#TODO link cc, cpp, c++, /bin/sh maybe should be after first stage
+ln -sv clang /usr/bin/cc
+ln -sv clang++ /usr/bin/c++
+ln -sv clang /usr/bin/cpp
+ln -sv /bin/bash /bin/sh
+
+export BOOTSTRAP_STAGE=2
+export PARALLEL_JOBS=5
+export CFLAGS='-O2' CXXFLAGS='-O2' LDFLAGS='-s'
+#todo, package list file is ugly, i suppose i should pass it as an argument
+export PACKAGE_LIST_FILE=/tools/required_packages
+#aand another global var :(
+export SOURCE_DIR=/usr/src/
+
+bash /tools/ncurses.sh
+bash /tools/bash.sh
+bash /tools/bison.sh
+bash /tools/perl.sh
+bash /tools/python.sh
+bash /tools/util-linux.sh
+
+find /usr/{lib,libexec} -name \*.la -delete
+rm -rf /usr/share/{info,man,doc}/*

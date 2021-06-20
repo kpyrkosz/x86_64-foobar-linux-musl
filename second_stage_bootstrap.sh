@@ -50,9 +50,15 @@ chown -R root:root "${LFS_SYSROOT}/"
 mknod -m 600 "${LFS_SYSROOT}/dev/console" c 5 1
 mknod -m 666 "${LFS_SYSROOT}/dev/null" c 1 3
 
-rm -rv "${LFS_SYSROOT}/tools"
+mkdir -v "${LFS_SYSROOT}/tools"
 
 #./lfs_enter.sh "${LFS_SYSROOT}" "/bin/bash"
-cp "second_stage_scripts/create_dirs.sh" "${LFS_SYSROOT}/tmp"
-chmod 500 "${LFS_SYSROOT}/tmp/create_dirs.sh"
-./lfs_enter.sh "${LFS_SYSROOT}" "tmp/create_dirs.sh"
+cp -va second_stage_scripts/* "${LFS_SYSROOT}/tools"
+chmod 500 "${LFS_SYSROOT}/tools/create_dirs.sh"
+# TODO, mvoe this outside first stage since it's used in both. Plus these global vars...
+cp -va "initial_bootstrap_scripts/validate_and_cd_into.sh" "${LFS_SYSROOT}/tools"
+cp -va "required_packages" "${LFS_SYSROOT}/tools"
+
+./lfs_enter.sh "${LFS_SYSROOT}" "/tools/create_dirs.sh"
+
+rm -rv "${LFS_SYSROOT}/tools"
