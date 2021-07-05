@@ -1,0 +1,6 @@
+# Format: package name, link to tar package
+bash http://ftp.gnu.org/gnu/bash/bash-5.1.tar.gz
+iana https://github.com/Mic92/iana-etc/releases/download/20210202/iana-etc-20210202.tar.gz
+zlib https://zlib.net/zlib-1.2.11.tar.xz
+bzip https://www.sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz
+xz https://tukaani.org/xz/xz-5.2.5.tar.xz
